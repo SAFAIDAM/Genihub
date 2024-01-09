@@ -1,6 +1,6 @@
 # Genihub
 
-# Installing Dependencies for Client and Server Directories
+## Installing Dependencies for Client and Server Directories
 
 ## Client Directory
 
