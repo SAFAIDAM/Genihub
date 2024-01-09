@@ -1,5 +1,7 @@
 # Genihub
-
+### project Guide: 
+#### first this project is a smalle community project (private one) that allows the platform users communicate with each others and create a com env between them. 
+#### this project is using `node.js` `v18.17.0 version`. 
 ## Installing Dependencies for Client and Server Directories
 
 ## Client Directory
