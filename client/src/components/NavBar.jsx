@@ -34,7 +34,7 @@ function NavBar() {
             </div>
             <div className="flex align-center gap-2">
               <HiOutlineMagnifyingGlass className="size-[20px] text-white relative right-[-270px] top-[8px] align-middle" />
-              <input className="bg-transparent" type="text" />
+              <input className="input bg-transparent" type="search" />
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

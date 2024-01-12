@@ -1,13 +1,10 @@
-
-import PostIem from "../components/PostIem"
-
+import PostIem from "../components/PostIem";
 function PfeIdeas() {
   return (
     <>
-    <PostIem/>
+      <PostIem />
     </>
-    
-  )
+  );
 }
 
-export default PfeIdeas
+export default PfeIdeas;
