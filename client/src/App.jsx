@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PostIem />}></Route>
+        <Route path="/ideas" element={<PostIem />}></Route>
         <Route path="/createidea" element={<PfeCreate />}></Route>
         <Route path="/updateidea" element={<PfeUpdate />}></Route>
       </Routes>
