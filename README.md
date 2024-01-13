@@ -60,6 +60,10 @@ cd server
 ```javascript
 npm install nodemon jsonwebtoken mongoose bcrypt express
 ```
+#### 3. Run the following command to install the `cors` middleware:
+```javascript
+npm install cors
+```
 
 # for the memebers collaborators : 
 ## if you added new dependencies on this project or any changes please add them here .
