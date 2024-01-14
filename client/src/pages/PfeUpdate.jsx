@@ -1,12 +1,48 @@
 
 import React from "react";
 import NavBar from "../components/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer"
 import { HiOutlineArrowDownTray } from "react-icons/hi2";
 import { useRef } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 function PfeUpdate() {
+
+  const { id } = useParams();
+
+
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/updateidea/${id}`)
+      .then((result) => {
+        console.log(result);
+        setTitle(result.data.title);
+        setDescription(result.data.description);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);  
+  
+  const update = (e) => {
+    e.preventDefault();
+    axios.put("http://localhost:8000/updateidea/"+id, {title, description})
+    .then(result => {
+      console.log(result)
+      navigate('/ideas')
+    })
+    .catch(err => console.log(err))
+
+  }
+
+
+
+
   const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -31,12 +67,14 @@ function PfeUpdate() {
       </div>
       <div className="flex justify-center"> 
         <div className="text-white w-[1067px] p-[6rem] bg-[#2A2F35] rounded-[22px]">
-          <form className="flex flex-col gap-6" action="">
+          <form onSubmit={update} className="flex flex-col gap-6" action="">
             <div className="flex flex-col gap-5">
               <label htmlFor="">Title / Header</label>
               <input
                 className="w-[870px] h-[80px] bg-[#202429] border border-[#4C4B4B] rounded-[22px] hover:border hover:border-[#3F64EC] focus:outline-none  focus:ring focus:border focus:border-[#3F64EC]  focus:pl-4 pl-4 "
                 type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -46,6 +84,8 @@ function PfeUpdate() {
                 className="w-[870px] h-[100px] bg-[#202429] border border-[#4C4B4B] rounded-[22px] hover:border hover:border-[#3F64EC] focus:outline-none  focus:ring focus:border focus:border-[#3F64EC] text-[13px]  focus:text-[13px] focus:pl-4 pl-4 focus:pt-4 pt-4 "
                 rows="4" 
                 cols="10"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-5">

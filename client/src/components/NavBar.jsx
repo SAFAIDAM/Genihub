@@ -12,7 +12,6 @@ function NavBar() {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-
   return (
     <div className="background ">
       <div className="container space">
@@ -22,13 +21,13 @@ function NavBar() {
               <img src={logo} alt="logo" />
               <ul className=" flex gap-[24px] text-white">
                 <li>
-                  <a href="">Recent News</a>
+                  <a href={"./Newspage"}>Recent News</a>
                 </li>
                 <li>
                   <a href="#">Latest updates</a>
                 </li>
                 <li>
-                  <a href="./PfeIdeas.jsx">Project ideas</a>
+                  <a href={"./ideas"}>Project ideas</a>
                 </li>
               </ul>
             </div>

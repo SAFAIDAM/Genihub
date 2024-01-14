@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const multer = require('mongoose')
 const PostModel = require("./models/Posts")
+const moment = require("moment");
 
 
 const app = express()
@@ -14,50 +15,62 @@ app.use(express.json())
 mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/ComApp')
 
 
-app.get("/ideas", (req, res) => {
-  PostModel.find({})
-    .then(data => {
-      res.send(data)
-      console.log(data)
-    })
+const PostSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  createdAt: { type: Date, default: Date.now }, // Add createdAt field
+});
+
+app.get("/ideas", async (req, res) => {
+  try {
+    const posts = await PostModel.find().sort({ createdAt: -1 });
+    // Format date and send the response
+    const formattedPosts = posts.map((post) => ({
+      ...post.toObject(),
+      formattedDate: moment(post.createdAt).format("MMM D, YYYY"), // Format date
+    }));
+    res.json(formattedPosts);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// app.get("/ideas", (req, res) => {
+//   PostModel.find({})
+//     .then(data => {
+//       res.send(data)
+//       console.log(data)
+//     })
+//     .catch(err => res.json(err))
+// })
+
+app.post("/createidea", (req, res) => {
+  PostModel.create(req.body)
+    .then(posts => res.json(posts))
     .catch(err => res.json(err))
 })
 
-app.post("/createUser", (req, res) => {
-  UserModel.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-})
-
-app.put("/updateUser/:id", (req, res) => {
+app.put("/updateidea/:id", (req, res) => {
   const id = req.params.id;
   PostModel.findByIdAndUpdate(
     { _id: id },
     {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      enroll: req.body.enroll,
+      title: req.body.title,
+      description: req.body.description,
+      // image: req.body.image
       // image: req.body.image
     }
   )
-    .then(user => res.json(user))
+    .then(post => res.json(post))
     .catch(err => res.json(err));
 });
 
-app.delete('/deleteUser/:id', (req, res) => {
+app.delete('/deleteidea/:id', (req, res) => {
   const id = req.params.id;
   PostModel.findByIdAndDelete({ _id: id })
-    .then(user => res.json(user))
+    .then(post => res.json(post))
     .catch(err => res.json(err));
 })
 
 
-  .then(() => {
-    console.log(" connected to database ");
-    app.listen(8001, () => {
-      console.log("server running on port 8000")
-    })
-  }).catch((err) => {
-    console.error(err)
-  })
+app.listen(8000, () => { console.log("server running on port 8000") })
