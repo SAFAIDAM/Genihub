@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   const [isHovered, setIsHovered] = useState(false);
+  const [ search, setSearch ] = useState('')
 
   const handleMouseEnter = () => {
     setIsHovered(true);

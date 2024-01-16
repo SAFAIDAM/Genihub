@@ -7,6 +7,7 @@ import { HiOutlineArrowDownTray } from "react-icons/hi2";
 import { useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 function PfeUpdate() {
 
@@ -110,7 +111,14 @@ function PfeUpdate() {
             </div>
             <div className="flex gap-3 mx-[45rem]">
               <button className=" bg-[#3F64EC] border border-[#3F64EC]  hover:transition-[0.4s] hover:border hover:border-[#3F64EC] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]" type="submit">Submit</button>
-              <button className="bg-[#4C4B4B] transition-[0.4s]  border border-[#4C4B4B]  hover:transition-[0.4s] hover:border hover:border-[#4C4B4B] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]" type="button">Cancel</button>
+              <Link to="/ideas">
+                  <button
+                    className="bg-[#4C4B4B] transition-[0.4s]  border border-[#4C4B4B]  hover:transition-[0.4s] hover:border hover:border-[#4C4B4B] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </Link>
             </div>
           </form>
         </div>

@@ -12,13 +12,11 @@ function User() {
   return (
     <>
       <NavBar />
-
       <div className="flex justify-center items-center flex-col">
         <div className="text-white mt-[10rem] mb-9 mr-[60rem]">
           <Link to="/Newspage">
           <button className="w-[66px] h-[66px] bg-[#3F64EC] border border-[#3F64EC] rounded-[66px]  hover:border hover:border-[#3F64EC] hover:transition-[0.4s] transition-[0.4s] hover:bg-transparent"><HiArrowLeft  className="ml-4 text-[28px]"/></button>
           </Link>
-          
         </div>
         <div className="flex gap-3 mb-5 mr-[22rem] text-[13px]">
           <img className="w-[109px] h-[109px] rounded-[109px] border-[10px] border-[#262E39]" src={image} alt="" />
@@ -104,6 +102,7 @@ function User() {
       </div>
       <Footer/>
     </>
+
   );
 }
 
