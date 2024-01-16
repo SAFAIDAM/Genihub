@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
 import axios from "axios";
@@ -17,7 +17,7 @@ function PfeCreate() {
   const Submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/createidea", { title, description })
+      .post("http://localhost:8000/createidea", { title, description, image})
       .then((result) => {
         console.log(result);
         navigate("/ideas");
@@ -25,17 +25,33 @@ function PfeCreate() {
       .catch((err) => console.log(err));
   };
 
-  const [image, setImage] = useState(null);
-  const fileInputRef = useRef(null);
+  const [file, setFile] = useState();
+  const [image, setImage] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+  const handleUpload = (e) => {
+    const formdata = new FormData();
+    formdata.append("file", file);
+    formdata.append("title", title);
+    formdata.append("description", description);
+    axios
+      .post("http://localhost:8000/upload", formdata)
+      .then((res) => {
+        setImage(res.data.image);
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleChooseFileClick = () => {
-    fileInputRef.current.click();
-  };
+ useEffect(() => {
+  if (image) {
+    axios
+      .get(`http://localhost:8000/Images/${image}`, { responseType: "blob" })
+      .then((res) => {
+        const imageUrl = URL.createObjectURL(new Blob([res.data]));
+        setImageUrl(imageUrl);
+      })
+      .catch((err) => console.log(err));
+  }
+}, [image])
 
   return (
     <>
@@ -49,7 +65,11 @@ function PfeCreate() {
         </div>
         <div className="flex justify-center">
           <div className="text-white w-[1067px] p-[6rem] bg-[#2A2F35] rounded-[22px]">
-            <form className="flex flex-col gap-6" onSubmit={Submit}>
+            <form
+              className="flex flex-col gap-6"
+              onSubmit={Submit}
+              encType="multipart/form-data"
+            >
               <div className="flex flex-col gap-5">
                 <label htmlFor="">Title / Header</label>
                 <input
@@ -79,40 +99,38 @@ function PfeCreate() {
               <div className="flex flex-col gap-5">
                 <label htmlFor="">Insert Image</label>
                 {/* Hidden file input */}
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleImageChange}
-                />
-                {/* Button to trigger file input */}
                 <button
                   type="button"
                   className="bg-[#3F64EC] w-[190px] h-[53px] border border-[#3F64EC] rounded-[30px] transition-[0.4s] hover:border hover:transition-[0.4s]  hover:border-[#3F64EC] hover:bg-transparent flex gap-2 pt-4 pb-4 px-5"
-                  onClick={handleChooseFileClick}
                 >
+                  <input
+                    type="file"
+                    // style={{ display: "none" }}
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                  {/* Button to trigger file input */}
                   Upload image{" "}
                   <HiOutlineArrowDownTray className="text-[20px]" />
                 </button>
-                {image && <p>Selected file: {image.name}</p>}
+                <img src={`http://localhost:8000/Images/${image}`} alt="uu" />
+                {/* {image && <p>Selected file: {image.name}</p>} */}
               </div>
               <div className="flex gap-3 mx-[45rem]">
                 <button
                   className=" bg-[#3F64EC] border border-[#3F64EC]  hover:transition-[0.4s] hover:border hover:border-[#3F64EC] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
                   type="submit"
+                  onClick={handleUpload}
                 >
                   Submit
                 </button>
-                <Link to='/ideas'>
-                <button
-                  className="bg-[#4C4B4B] transition-[0.4s]  border border-[#4C4B4B]  hover:transition-[0.4s] hover:border hover:border-[#4C4B4B] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
-                  type="button"
-                  
-                >
-                  Cancel
-                </button>
+                <Link to="/ideas">
+                  <button
+                    className="bg-[#4C4B4B] transition-[0.4s]  border border-[#4C4B4B]  hover:transition-[0.4s] hover:border hover:border-[#4C4B4B] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
                 </Link>
-                
               </div>
             </form>
           </div>

@@ -73,8 +73,9 @@ function PostIem() {
                   <img
                     className="w-[52px] h-[52px] rounded-[30px]"
                     src={image}
-                    alt=""
+                    alt="upload"
                   />
+                  
                   <h4 className="mt-3">1</h4>
                 </div>
               </div>
@@ -90,10 +91,11 @@ function PostIem() {
                     <img
                       className="w-[430px] h-[ 206px] rounded-[22px] mb-5"
                       src={image}
+                      // src={`http://localhost:8000/Images/${post.image}`}
                       alt="image"
                     />
                     <div className="flex justify-between ">
-                      <p className="text-[12px] w-[291px]">
+                      <p className="text-[12px] w-[291px] line-clamp-2">
                         {post.description}
                       </p>
                       <p className="text-[12px] text-[#7F8286]">

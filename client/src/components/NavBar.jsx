@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo.svg";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -35,6 +36,7 @@ function NavBar() {
               <HiOutlineMagnifyingGlass className="size-[20px] text-white relative right-[-270px] top-[8px] align-middle" />
               <input className="input bg-transparent" type="search" />
               <div className="icon">
+                <Link to='/profile'>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="36"
@@ -64,6 +66,7 @@ function NavBar() {
                     />
                   </g>
                 </svg>
+                </Link>
               </div>
             </div>
           </nav>

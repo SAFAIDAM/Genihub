@@ -52,7 +52,6 @@ function PfeUpdate() {
   };
 
   const handleChooseFileClick = () => {
-    // Programmatically trigger click event on the hidden file input
     fileInputRef.current.click();
   };
   return (
