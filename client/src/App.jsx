@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import { UserContextProvider } from '../context/userContext';
 import axios from 'axios';
 import {Toaster} from 'react-hot-toast'
+import { SharedLinks } from "./components/SharedLinks";
 
 axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.withCredentials = true
@@ -25,6 +26,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Newspage" element={<News />} />
+        <Route path="/sharing" element={< SharedLinks/>}></Route>
         <Route path="/profile" element={<User />} />
         <Route path="/ideas" element={<PostIem />}></Route>
         <Route path="/createidea" element={<PfeCreate />}></Route>

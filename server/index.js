@@ -5,6 +5,7 @@ const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 const PostModel = require("./models/Posts")
+const LinkModel = require("./models/Share.js")
 const moment = require("moment");
 const cookieParser = require('cookie-parser')
 
@@ -108,6 +109,83 @@ app.delete('/deleteidea/:id', (req, res) => {
 })
 
 
+// get method
+app.get("/sharedLinks", (req, res) => {
+  LinkModel.find({})
+    .then(data => {
+      res.send(data)
+      console.log(data)
+    })
+    .catch(err => res.json(err))
+})
+
+
+// getUser
+app.get("/getLink/:id", (req, res) => {
+  const id = req.params.id;
+
+  LinkModel.findById(id)
+    .then(data => {
+      if (!data) {
+        return res.status(404).json({ message: 'Link not found' });
+      }
+
+      res.send(data);
+      console.log(data);
+    })
+    .catch(err => res.status(500).json(err));
+});
+
+
+// post method
+app.post("/shareLink", (req, res) => {
+  LinkModel.create(req.body)
+    .then(links => res.json(links))
+    .catch(err => res.json(err))
+})
+
+// update mehtod
+app.put('/updateLink/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Validate if id is a valid ObjectId
+  if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({ message: 'Invalid link ID format' });
+  }
+  LinkModel.findByIdAndUpdate(id, {
+      linkTitle:req.body.linkTitle,
+      linkUrl:req.body.linkUrl,
+      // linkImage:req.body.linkImage
+  }, { new: true })
+      .then(updatedLink => {
+          if (!updatedLink) {
+              return res.status(404).json({ message: 'Link not found' });
+          }
+          res.json(updatedLink);
+      })
+      .catch(err => {
+          console.error("Error updating link:", err);
+          res.status(500).json(err);
+      });
+});
+
+
+// delete method
+app.delete('/deleteLink/:id', (req, res) => {
+  const id = req.params.id;
+  console.log("Deleting link with ID:", id);
+  LinkModel.findByIdAndDelete(id)
+      .then(deletedLink => {
+          if (!deletedLink) {
+              return res.status(404).json({ message: 'Link not found' });
+          }
+          res.json({ message: 'Link deleted successfully', deletedLink });
+      })
+      .catch(err => {
+          console.error("Error deleting link:", err);
+          res.status(500).json(err);
+      });
+});
 
 
 

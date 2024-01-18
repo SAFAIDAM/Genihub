@@ -1,4 +1,4 @@
-import "../images.css";
+
 import image from "../assets/image.jpg";
 import user from "../assets/user.jpg"
 import d from "../assets/group.jpg"
@@ -89,7 +89,7 @@ useEffect(() => {
         </div>
         <div className="">
           <Link to="/createidea">
-            <button className="font-thin flex gap-2 pt-3 pb-3 px-5 rounded-[17px] bg-gradient-to-r from-[#3C6FF2] to-[#5724A4]">
+            <button className=" flex gap-2 pt-3 pb-3 px-5 rounded-[17px] bg-gradient-to-r from-[#3C6FF2] to-[#5724A4]">
               Insert New Ideas
               <HiMiniPlus className="text-[17px] mt-1" />
             </button>

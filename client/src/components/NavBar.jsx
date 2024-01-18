@@ -45,7 +45,7 @@ function NavBar() {
                   <a href={"./Newspage"}>Recent News</a>
                 </li>
                 <li>
-                  <a href="#">Latest updates</a>
+                  <a href={"./Sharing"}>Latest updates</a>
                 </li>
                 <li>
                   <a href={"./ideas"}>Project ideas</a>
