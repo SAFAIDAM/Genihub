@@ -40,10 +40,10 @@ function App() {
             
         </nav>
         <div className="flex items-center justify-center flex-col w-1/2 h-screen">
-          <h1 className="text-8xl font-bold text-white text-center pb-16">
+          <h1 className="text-[63px] font-bold text-white text-center pb-6">
             Collaborate Together <br /> News, Links, Ideas.
           </h1>
-          <p className="text-center text-xl text-white pb-16">
+          <p className="text-center text-[20px] text-white pb-16">
             Join our vibrant community today! Sign up to unlock a world of
             knowledge sharing and collaborative projects. Your journey into a
             community of innovation starts here.
@@ -77,10 +77,10 @@ function App() {
         style={{ backgroundImage: `url(${bg2})` }}
       >
         <div className="flex items-center justify-center flex-col w-1/2 h-screen">
-          <h1 className="text-8xl font-bold text-white text-center pb-16">
+          <h1 className="text-[60px] font-bold text-white text-center pb-6">
             About the community{" "}
           </h1>
-          <p className="text-center text-xl text-white ">
+          <p className="text-center text-[20px] text-white ">
             Community is an online platform that fosters communication,
             collaboration, and the sharing of ideas among individuals interested
             in technology and software development. It serves as a hub for

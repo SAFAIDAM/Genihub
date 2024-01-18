@@ -47,7 +47,7 @@ export default function Login() {
       <form className="form-group " onSubmit={loginUser}>
         <h1 className="text-white text-center text-5xl font-bold" >Login</h1>
         <h3 className="text-gray-400 text-center text-base font-normal">Log into your community account</h3>
-        <label className="block mb-3 mt-10 mr-[25rem] text-white text-[16px] font-medium">Email</label>
+        <label className="block mb-3 mt-10 mr-[14rem] text-white text-[13px] font-medium">Email</label>
         <input
           type="email"
           placeholder="Enter Email"
@@ -55,7 +55,7 @@ export default function Login() {
           onChange={(e) => setData({ ...data, email: e.target.value })}
           className={`input-group ${userNotFound ? 'error-border' : ''}`}
         />
-        <labe className="block mb-3 mt-10 mr-[24rem] text-white text-[16px] font-medium">Password</labe>
+        <labe className="block mb-3 mt-10 mr-[14rem] text-white text-[13px] font-medium">Password</labe>
         <input     
           type="password"
           placeholder="Enter Password"
@@ -64,8 +64,8 @@ export default function Login() {
           className={`input-group  ${userNotFound ? 'error-border' : ''}`}
         />
         <div className="">
-        <p  className=" text-[#AAA] text-[15px] mr-[22rem] flex justify-center gap-1"><IoCheckboxOutline /> Remember me</p>
-        <p className="text-[#AAA] text-[15px] ml-[22rem]">Forgot password ?</p>
+        <p  className=" text-[#AAA] text-[10px] mr-[14rem] flex justify-center gap-1 mt-4"><IoCheckboxOutline /> Remember me</p>
+        <p className="text-[#AAA] text-[10px] ml-[14rem]">Forgot password ?</p>
         </div>
         {userNotFound ? (
           <button type="button">Login</button>
