@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 
 function News() {
   const [posts, setPosts] = useState([]);
-  const [visiblePosts, setVisiblePosts] = useState(5);
+  const [visiblePosts, setVisiblePosts] = useState(3);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

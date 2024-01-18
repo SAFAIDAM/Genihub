@@ -119,7 +119,7 @@ function PfeCreate() {
                 <button
                   className=" bg-[#3F64EC] border border-[#3F64EC]  hover:transition-[0.4s] hover:border hover:border-[#3F64EC] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
                   type="submit"
-                  onClick={handleUpload}
+                  
                 >
                   Submit
                 </button>
