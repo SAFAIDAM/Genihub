@@ -6,17 +6,16 @@ const multer = require('multer')
 const path = require('path')
 const PostModel = require("./models/Posts")
 const moment = require("moment");
+const cookieParser = require('cookie-parser')
 
 
 const app = express()
-app.use(cors())
-
 app.use(express.json())
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }))
+app.use('/', require('./routes/authRoutes'))
 
-mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/ComApp')
-
-
-
+mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/comunity')
 
 
 app.use(express.static('public'));
@@ -81,6 +80,7 @@ app.post("/createidea", upload.single('file'), (req, res) => {
     .catch(err => res.json(err))
 })
 
+
 app.put("/updateidea/:id", (req, res) => {
   const id = req.params.id;
   PostModel.findByIdAndUpdate(
@@ -102,6 +102,11 @@ app.delete('/deleteidea/:id', (req, res) => {
     .then(post => res.json(post))
     .catch(err => res.json(err));
 })
+
+
+
+
+
 
 
 app.listen(8000, () => { console.log("server running on port 8000") })

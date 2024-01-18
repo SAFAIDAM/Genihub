@@ -12,8 +12,6 @@ import { Link } from 'react-router-dom'
 function PfeUpdate() {
 
   const { id } = useParams();
-
-
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
 

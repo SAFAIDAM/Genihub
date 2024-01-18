@@ -3,8 +3,11 @@ import { HiArrowUpTray } from "react-icons/hi2";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { ClipLoader } from "react-spinners";
+import {useContext} from "react"
+import { UserContext } from "../../context/userContext"
 
 function News() {
+  const {user} = useContext(UserContext)
   const [posts, setPosts] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState(3);
   const [loading, setLoading] = useState(true);
@@ -13,8 +16,9 @@ function News() {
     const fetchData = async () => {
       try {
         const apiKey = "ce9d97bc53ba4883a0d139bb11b2ea1a";
+        const pageSize = 50; // Set your desired page size
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=${apiKey}`
+          `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=${apiKey}&pageSize=${pageSize}`
         );
         const data = await response.json();
         const filteredPosts = data.articles.filter(
@@ -27,9 +31,10 @@ function News() {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   const loadMore = () => {
     setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 10);

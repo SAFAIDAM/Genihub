@@ -17,7 +17,7 @@ function PfeCreate() {
   const Submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/createidea", { title, description, image})
+      .post("http://localhost:8000/createidea", { title, description, image })
       .then((result) => {
         console.log(result);
         navigate("/ideas");
@@ -41,17 +41,17 @@ function PfeCreate() {
       .catch((err) => console.log(err));
   };
 
- useEffect(() => {
-  if (image) {
-    axios
-      .get(`http://localhost:8000/Images/${image}`, { responseType: "blob" })
-      .then((res) => {
-        const imageUrl = URL.createObjectURL(new Blob([res.data]));
-        setImageUrl(imageUrl);
-      })
-      .catch((err) => console.log(err));
-  }
-}, [image])
+  useEffect(() => {
+    if (image) {
+      axios
+        .get(`http://localhost:8000/Images/${image}`, { responseType: "blob" })
+        .then((res) => {
+          const imageUrl = URL.createObjectURL(new Blob([res.data]));
+          setImageUrl(imageUrl);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [image]);
 
   return (
     <>
@@ -112,14 +112,13 @@ function PfeCreate() {
                   Upload image{" "}
                   <HiOutlineArrowDownTray className="text-[20px]" />
                 </button>
-                <img src={`http://localhost:8000/Images/${image}`} alt="uu" />
+                <img src={`http://localhost:8000/Images/${image}`} />
                 {/* {image && <p>Selected file: {image.name}</p>} */}
               </div>
               <div className="flex gap-3 mx-[45rem]">
                 <button
                   className=" bg-[#3F64EC] border border-[#3F64EC]  hover:transition-[0.4s] hover:border hover:border-[#3F64EC] hover:bg-transparent px-4 pt-2 pb-2 rounded-[22px]"
                   type="submit"
-                  
                 >
                   Submit
                 </button>

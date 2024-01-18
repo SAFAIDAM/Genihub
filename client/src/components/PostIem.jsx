@@ -1,5 +1,7 @@
 import "../images.css";
 import image from "../assets/image.jpg";
+import user from "../assets/user.jpg"
+import d from "../assets/group.jpg"
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,18 +16,38 @@ function PostIem() {
   // const loggedInUserId = 1;
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/ideas")
-      .then((result) => {
-        setPosts(result.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
+  const [generatedUsernames, setGeneratedUsernames] = useState({});
+
+useEffect(() => {
+  // Fetch posts
+  axios
+    .get("http://localhost:8000/ideas")
+    .then((result) => {
+      setPosts(result.data);
+
+      // Generate random usernames for each post
+      result.data.forEach((post) => {
+        axios
+          .get("https://randomuser.me/api/")
+          .then((response) => {
+            const username = response.data.results[0].login.username;
+            setGeneratedUsernames((prevUsernames) => ({
+              ...prevUsernames,
+              [post.id]: username,
+            }));
+          })
+          .catch((error) => {
+            console.error("Error fetching random username:", error);
+          });
       });
-  }, []);
+
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+}, []);
   // const handleDelete = (id) => {
   //   axios
   //     .delete("http://localhost:8000/deleteUser/" + id)
@@ -54,6 +76,8 @@ function PostIem() {
       })
       .catch((err) => console.log(err));
   };
+
+  
 
   return (
     <>
@@ -85,11 +109,11 @@ function PostIem() {
                   <div className="flex gap-3 mb-3 align-middle text-white ">
                     <img
                       className="w-[52px] h-[52px] rounded-[30px]"
-                      src={image}
+                      src={user}
                       alt="upload"
                     />
 
-                    <h4 className="mt-3">1</h4>
+                    <h4 className="mt-3">{generatedUsernames[post.id] || 'DefaultUsername'}</h4>
                   </div>
                 </div>
                 <section
@@ -103,7 +127,7 @@ function PostIem() {
                       <h3 className="text-center mb-2">{post.title}</h3>
                       <img
                         className="w-[430px] h-[ 206px] rounded-[22px] mb-5"
-                        src={image}
+                        src={d}
                         // src={`http://localhost:8000/Images/${post.image}`}
                         alt="image"
                       />
