@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
 import Newspage from '../pages/Newspage';
-import './Register.css'; 
+
 import { IoCheckboxOutline } from "react-icons/io5";
 // Import your CSS file for styling
 

@@ -4,8 +4,6 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IoCheckboxOutline } from "react-icons/io5";
-import "./Register.css";
-
 export default function Register() {
   const navigate = useNavigate();
   const [data, setData] = useState({

@@ -3,7 +3,6 @@ import backgroundImage from "../assets/bg1.png";
 import right from "../assets/RE.png";
 import left from "../assets/REE.png";
 import svgd from "../assets/Gr126.svg";
-import "./landing.css";
 import logo from "../assets/logo.png";
 import bg2 from "../assets/bg2.png";
 import flesh from "../assets/flesh.png";
