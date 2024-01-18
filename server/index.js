@@ -34,7 +34,7 @@ const upload = multer({
 })
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the CRUD app!");
+  res.send("Welcome!");
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
