@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }))
 app.use('/', require('./routes/authRoutes'))
 
-mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/comunity')
+mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/comunity?retryWrites=true&w=majority')
 
 
 app.use(express.static('public'));
@@ -32,6 +32,10 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage
 })
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the CRUD app!");
+});
 
 app.post('/upload', upload.single('file'), (req, res) => {
   try {
