@@ -1,23 +1,45 @@
 import { useState } from "react";
 import { UpdateLink } from "./UpdateLink";
+import axios from "axios";
 
 
  function ThreeDots({ onClose, linkId }) {
 
     const [updatePop, setUpdatePop] = useState(false);
 
+
+    const handleUpdateClick = () => {
+        setUpdatePop(true);
+      };
+    
+      const handleDelete = () => {
+        axios
+          .delete(`http://localhost:8000/deleteLink/${linkId}`)
+          .then((res) => {
+            console.log(res);
+            window.location.reload();
+          })
+          .catch((err) => console.log(err));
+      };
+
+
+
     return (
         <>
-            {/* {updatePop && <UpdateLink onUpdate={() => setUpdatePop(false)} />} */}
-            {updatePop && <UpdateLink onUpdate={() => setUpdatePop(false)} linkId={linkId} />}
+            {updatePop && (
+                <UpdateLink
+                id={linkId}
+                onUpdate={() => setUpdatePop(false)}
+                />
+            )}
             <div className=" absolute top-[70px] right-[24px] w-[198px] h-[180px] flex flex-col justify-center items-center gap-4 rounded-3xl bg-[#222] border border-solid border-[#4C4B4B]">
-                <button onClick={() => setUpdatePop(true)} className="flex items-center w-[100px] gap-6">
+                <button onClick={handleUpdateClick}className="flex items-center w-[100px] gap-6">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.5724 3.30128L15.1319 1.7417C15.9932 0.88037 17.3898 0.88037 18.2511 1.7417C19.1124 2.60303 19.1124 3.99953 18.2511 4.86086L16.6915 6.42044M13.5724 3.30128L4.41147 12.4622C3.24848 13.6252 2.66696 14.2066 2.27101 14.9152C1.87504 15.6239 1.47665 17.2971 1.0957 18.8971C2.6957 18.5161 4.36892 18.1177 5.07753 17.7217C5.78613 17.3258 6.36763 16.7443 7.53062 15.5814L16.6915 6.42044M13.5724 3.30128L16.6915 6.42044" stroke="#AAAAAA" strokeWidth="0.6" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     Update
                 </button>
-                <button className="flex items-center w-[100px] gap-6">
+                <button onClick={() => handleDelete()} className="flex items-center w-[100px] gap-6">
                 <svg 
 
                     xmlns="http://www.w3.org/2000/svg"
