@@ -65,5 +65,3 @@ npm install nodemon jsonwebtoken mongoose bcrypt express
 npm install cors
 ```
 
-# for the memebers collaborators : 
-## if you added new dependencies on this project or any changes please add them here .
