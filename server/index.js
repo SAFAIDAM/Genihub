@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }))
 app.use('/', require('./routes/authRoutes'))
 
-mongoose.connect('mongodb+srv://idamhamedsafa:88safa88@cluster0.hjpt4hx.mongodb.net/comunity?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://idamhamedsafa:@cluster0.hjpt4hx.mongodb.net/comunity?retryWrites=true&w=majority')
 
 
 app.use(express.static('public'));
